@@ -1,0 +1,350 @@
+$(document).ready(function(){
+	Restart();
+	AddEvents();
+})
+
+function Restart(){
+	HideInAvaliacaoClinica();
+	HideInCritMaiores();
+	HideInHemoOrto();
+	HideInResult();
+}
+
+function HideInAvaliacaoClinica(){
+	if(!$('#chkOslerFebre').attr('checked'))
+		$('#divTempoFebre').hide();
+	if(!$('#rdmOdontologiaSim').attr('checked'))
+		$('#divOdonto').hide();
+	if(!$('#rdmGenitourinarioSim').attr('checked'))
+		$('#divGenitourinario').hide();
+	if(!$('#rdmDigestivoSim').attr('checked'))
+		$('#divDigestivo').hide();
+	$('#aLink').hide();
+}
+
+function HideInCritMaiores(){
+	if(!$('#chkPersistentePositiva').attr('checked'))
+		$('#divHemocultura').hide();
+}
+
+function HideInHemoOrto(){
+	if(!$('#chkHemoculturaAdm').attr('checked')){
+		$('#txtHemocultura').hide().val('');
+	}
+	if(!$('#chkUroculturaAdm').attr('checked')){
+		$('#txtUrocultura').hide().val('');
+	}
+}
+
+function HideInResult(){
+	$('#divAntibioticoterapia').hide();
+	$('#divTerapiaEmpirica').hide();
+	$('#divNaoBateComHemoCultura').hide();
+	$('#divNaoBateSemHemoCultura').hide();
+	$('#divNaoASuspeita').hide();
+}
+
+function AddEvents(){
+	//Identificacao
+	$('#txtSus').change(ProcuraDadosSUS);
+	$('#txtCpf').change(ProcuraDadosCPF);
+	
+	//Avaliacao Clinica
+	$('#chkOslerFebre').click(function(){
+		if(this.checked)
+			$('#divTempoFebre').fadeIn();
+		else
+			$('#divTempoFebre').fadeOut();
+	})
+		
+	$('.baseDuke').click(function(){
+		if(this.checked)
+			$('#aLink').fadeIn();
+		else
+			if(!BaseDukeP())
+				$('#aLink').fadeOut();
+	});
+	$('#rdmOdontologiaSim').click(function(){
+		$('#divOdonto').fadeIn('slow');
+	});
+	$('#rdmOdontologiaNao').click(function(){
+		$('#divOdonto').fadeOut('slow');
+	});
+	
+	$('#rdmGenitourinarioSim').click(function(){
+		$('#divGenitourinario').fadeIn('slow');
+	});
+	$('#rdmGenitourinarioNao').click(function(){
+		$('#divGenitourinario').fadeOut('slow');
+	});
+	
+	$('#rdmDigestivoSim').click(function(){
+		$('#divDigestivo').fadeIn('slow');
+	});
+	$('#rdmDigestivoNao').click(function(){
+		$('#divDigestivo').fadeOut('slow');
+	});
+	
+	
+	//Criterios Maiores
+	$('#chkPersistentePositiva').click(function(){
+		if(this.checked)
+			$('#divHemocultura').fadeIn('slow');
+		else
+			$('#divHemocultura').fadeOut('slow');
+	});
+	
+	//Hemo/Orto
+	$('#chkHemoculturaAdm').click(function(){
+		if(this.checked){
+			$('#txtHemocultura').fadeIn('slow');
+			$('#divHemoculturaDetalhes').fadeIn('slow');
+		}
+		else{
+			$('#txtHemocultura').fadeOut('slow');
+			$('#divHemoculturaDetalhes').fadeOut('slow').html('');
+		}
+	});
+	
+	$('#chkUroculturaAdm').click(function(){
+		if(this.checked){
+			$('#txtUrocultura').fadeIn('slow');
+			$('#divUroculturaDetalhes').fadeIn('slow');
+		}
+		else{
+			$('#txtUrocultura').fadeOut('slow');
+			$('#divUroculturaDetalhes').fadeOut('slow').html('');
+		}
+	});
+	
+	$('#txtHemocultura').on('input',CriaAmostrasHemo);
+	$('#txtUrocultura').on('input',CriaAmostrasUro);
+	$('#fimResult').click(CalcularResultado);
+}
+
+
+function CriaAmostrasUro(){
+	console.log('teste');
+	CiraAmostras($('#divUroculturaDetalhes'),'AgenteUrocultura',~~this.value)
+}
+
+function CriaAmostrasHemo(){
+	CiraAmostras($('#divHemoculturaDetalhes'),'AgenteHemocultura',~~this.value)
+}
+
+//funcao complexa cria amostras 
+//TODO puxar o leyalt externamente?
+function CiraAmostras(div,idBase,number){
+	div.html('');
+	console.log(number);
+	for(var i=1;i<=number;i++){
+		console.log(i);
+		div.append(
+				$('<input/>',{
+					 'type': 'checkbox',
+                    'name': 'chk'+idBase+i,
+                    'id': 'chk'+idBase+i,
+                    'tardiv':'#div'+idBase+i,
+                    'class':'hemocultura'
+				}).click(function(){
+					if(this.checked){
+						console.log($(this).attr('tardiv'));
+						console.log($($(this).attr('tardiv')).length);
+						$($(this).attr('tardiv')).fadeIn('slow');
+					}
+					else{
+						$($(this).attr('tardiv')).fadeOut('slow');
+						$($(this).attr('tardiv')).val('');
+					}
+				})
+			).append(
+				$('<label/>',{
+					'for':'chk'+idBase+i
+				}
+				).text(i+'ª Amostra Agente Presente')
+			).append(
+				$('<div/>',{
+					'id':'div'+idBase+i,
+					'data-role':'fieldcontain'
+				}).append(
+						$('<label/>',{
+							'for':'txt'+idBase+i
+						}
+						).text('Agente:')
+					).append(
+						$('<select/>',{
+							"id":"cmb"+idBase+i,
+							"name":"cmb"+idBase+i,
+							"outros":'#divtxt'+idBase+i
+						}).append(
+								$('<option/>')
+						).append(
+							$('<option/>',{
+								"value":1
+							}).text("Staphylococcus aureus")
+						).append(
+							$('<option/>',{
+								"value":2
+							}).text("Streptococcus viridans")
+						).append(
+							$('<option/>',{
+								"value":3
+							}).text("Staphylococcus coagulase negativo")
+						).append(
+							$('<option/>',{
+								"value":4
+							}).text("Streptococcus sp.")
+						).append(
+							$('<option/>',{
+								"value":5
+							}).text("Enterococcus")
+						).append(
+							$('<option/>',{
+								"value":6
+							}).text("Estruturas leveduriformes")
+						).append(
+							$('<option/>',{
+								"value":7
+							}).text("Outros")
+						).change(function(){
+							if(this.value == "7"){
+								$($(this).attr('outros')).fadeIn('slow');
+								console.log($(this).attr('outros'));
+							}
+							else{
+								$($(this).attr('outros')).fadeOut('slow');
+							}
+						})
+					).append(
+							$('<div/>',{
+								'id':'divtxt'+idBase+i,
+								'data-role':'fieldcontain'
+							}).append(
+								$('<label/>',{
+									'for':'txt'+idBase+i
+								}
+								).text('Nome:')
+							).append(
+								$('<input/>',{
+									 'type': 'text',
+				                     'name': 'txt'+idBase+i,
+				                     'id': 'txt'+idBase+i
+								})
+							).hide()
+					).hide()
+				);
+		div.trigger('create');
+	}
+}
+
+
+function CalcularResultado(){
+	var grupoTeste = BaseDukeP();
+	if(!grupoTeste){//ele nao passa nos primeiros criterios para estar nos testes de criterios de duke
+		$('#divNaoASuspeita').fadeIn();//não deve chegar aqui
+		return;
+	}
+	
+	var critMa =0;
+	$('.critMa').each(function(){
+		var intcom = this.checked ? 1 : 0;
+		console.log(this);
+		console.log(intcom);
+		critMa = critMa+intcom;
+	});
+	
+	var critme = 0
+	$('.critme').each(function(){
+		var intcom = this.checked ? 1 : 0;
+		console.log(this);
+		console.log(intcom);
+		critme = critme+intcom;
+	});
+	
+	var total = critme+critMa*2.5
+	var hemot =0
+	var hemoEx = false;
+	$('.hemocultura').each(function(){
+		hemoEx = true;
+		var intcom = this.checked ? 1 : 0;
+		console.log(this);
+		console.log(intcom);
+		hemot = hemot+intcom;
+	});
+	console.log(total)
+	if(total>=5){//Caminho vermelho
+		if(hemot>0)
+			$('#divAntibioticoterapia').fadeIn();
+		else
+			$('#divTerapiaEmpirica').fadeIn();
+	}
+	else{
+		if(hemoEx){//tenho o hemograma?
+			if(hemot==0)//nao fecha o hemograma
+				$('#divNaoBateComHemoCultura').fadeIn();
+			else//hemograma com suspeita
+				$('#divTerapiaEmpirica').fadeIn();
+		}	
+		else //nao tenho hemograma
+			$('#divNaoBateSemHemoCultura').fadeIn();
+	}
+	EnvioDeDados();
+}
+
+function EnvioDeDados(){
+	//TODO pegar dados
+	$.ajax({
+		type: "POST",
+		url: "/webservice/getInfo.php",
+		data: obdata
+		})
+		.done(function( msg ) {
+			resp = jQuery.parseJSON(msg);
+			//TODO popUp de dados enviados
+		});
+}
+
+function BaseDukeP(){
+	var testaDuke = false
+	$('.baseDuke').each(function(){
+		if(this.checked)
+			testaDuke = true;
+	});
+	return testaDuke;
+}
+
+function ProcuraDadosSUS(){
+	var obdata = {};
+	obdata.sus=this.value
+	ProcuraDados(obdata);
+}
+
+function ProcuraDadosCPF(){
+	var obdata = {};
+	if(!TestaCPF(this.value)){
+		PopError("CPF inválido!");
+		this.value = "";
+		return;
+	}
+	obdata.cpf=this.value
+	ProcuraDados(obdata);
+}
+
+function ProcuraDados(obdata){
+	$.ajax({
+		type: "POST",
+		url: "/webservice/getInfo.php",
+		data: obdata
+		})
+		.done(function( msg ) {
+			resp = jQuery.parseJSON(msg);
+			//TODO popUp chegaram dados e colocar dados
+		});
+}
+
+
+
+function PopError(msg){
+	$('#msgError').text(msg);
+	$('#errorPOPUp').popup( "open")
+}

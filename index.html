@@ -1,0 +1,867 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Diagnostico</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="js/jquery.mobile-1.4.2.min.css" />
+	
+	<script src="js/jquery-2.1.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/diagnostico.js"></script>
+	<script src="js/lib.js"></script>
+
+
+	<link rel="stylesheet" href="css/tema.css" />
+	<link rel="stylesheet" href="css/style.css" />
+
+
+	  <link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
+	  <script src="js/jquery.ui.datepicker.js"></script>
+	  <script src="js/jquery.mobile.datepicker.js"></script>
+	  
+
+</head>
+<body>
+
+
+<!-- Start of first page -->
+<div data-role="page" id="identificacao">
+<div id="divSplash" class="splash">
+	<div role="main">
+		<div id="bg">
+			  <img src="img/meio.png" alt="">
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div data-role="header" data-position="fixed" id="header">
+		
+		<h1>Identificação</h1>
+		<a href="#rightpanel1" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menu</a>
+	</div><!-- /header -->
+	<div data-role="popup" id="errorPOPUp">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<p id="msgError"></p>
+	</div>
+	
+	  <div role="main" class="ui-body ui-body-a ui-corner-all">
+	      <form id="frmIdentificacao" action="post">
+			<label for="txtSus">Nº do SUS:</label>
+			<input name="txtSus" id="txtSus" value="" maxlength="15" type="text">
+			<label for="txtCpf">CPF:</label>
+			<input name="txtCpf" id="txtCpf" value="" maxlength="11" type="text">
+			<label for="txtNome">Nome do paciente:</label>
+			<input name="txtNome" id="txtNome" value="" type="text">
+			<label for="txtIdade">Idade:</label>
+			<input type="range" name="txtIdade" id="txtIdade" value="10" min="0" max="90" data-highlight="true">
+			<label for="rdmSexo">Sexo:</label>
+			<label>
+		        <input name="rdmSexo" id="rdmSexoM" value="1" type="radio" checked>Masculino
+		    </label>
+		    <label>
+		    	<input name="rdmSexo" id="rdmSexoF" value="2" class="custom" type="radio">Feminino
+		    </label>
+		    <label for="txtRegistro">Registro hospitalar:</label>
+			<input name="txtRegistro" id="txtRegistro" value="" type="text">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend for="rdmHospital">Hospital:</legend>
+				<label>
+			        <input name="rdmHospital" id="rdmHospitalHUOL" value="1" type="radio">HUOL
+			    </label>
+			    <label>
+			    <input name="rdmHospital" id="rdmHospitalHGT" value="2" class="custom" type="radio">HGT
+			    </label>
+		    </fieldset>
+		    <label for="txtEnfermaria">Enfermaria/Leito:</label>
+			<input name="txtEnfermaria" maxlength="255" id="txtEnfermaria" value="" type="text">
+			<label for="date">Data da internação:</label>
+	
+			<input type="text" id="date-input" data-inline="false" data-role="date">
+		</form>
+	
+	  </div>
+		
+		<div class="ui-grid-solo" id="footer">
+		    <div class="ui-block-a"><a href="#avaliacaoclinica"  class="ui-btn ui-shadow ui-corner-all">Avaliação clínica</a></div>
+		</div>
+
+		<!-- rightpanel3  -->
+		<div data-role="panel" id="rightpanel1" data-position="right" data-display="overlay" >
+			<ul data-role="listview">
+				<li data-role="list-divider">Menu</li>
+			    <li data-icon="navigation"><a href="#referencia">Referências</a></li>
+			    <li data-icon="info"><a href="#creditos">Créditos</a></li>
+			    <li data-icon="delete"><a href="#" data-rel="close">Fechar</a></li>
+			</ul>
+
+	      
+		</div><!-- /rightpanel3 -->
+</div>
+</div>	
+
+	
+<!-- second page -->
+<div data-role="page" id="avaliacaoclinica">
+
+	<div data-role="header" data-position="fixed" id="header">
+		<a href="#identificacao" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Avaliação clínica</h1>
+		<a href="#rightpanel2" data-icon="bars" data-iconpos="notext">Menu</a>
+	</div><!-- /header -->
+	<div data-role="popup" id="errorPOPUp">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<p id="msgError"></p>
+	</div>
+	
+	  <div role="main" class="ui-content">
+		<form id="frmAvaliacaoClinica" action="post">
+			<fieldset  data-role="controlgroup">
+			    <legend>Tríade de Osler:</legend>
+			    <input class="baseDuke"  required="" codigo="1" name="chkOslerSopro" value="sopro" id="chkOslerSopro"  type="checkbox">
+			    <label for="chkOslerSopro">Sopro</label>
+			    <input class="baseDuke"  required="" codigo="2" name="chkOslerAnemia" value="anemia" id="chkOslerAnemia"  type="checkbox">
+			    <label for="chkOslerAnemia">Anemia</label>
+			    <input class="baseDuke"  required="" codigo="3" name="chkOslerFebre" value="febre" id="chkOslerFebre"  type="checkbox">
+			    <label for="chkOslerFebre">Febre</label>
+			    <div data-role="fieldcontain" id="divTempoFebre" >
+				    <legend   for="txtTempoFebre">Há quanto tempo(em dias)?</legend>
+				    <input type="range" name="txtTempoFebre" id="txtTempoFebre" required value="0" min="0" max="365" data-highlight="true">
+				</div>
+			</fieldset>
+			<legend for="rdmOdontologia">Realizou procedimento(s) odontológico(s) recente(s)?</legend>
+		    <input required name="rdmOdontologia" codigo="4"  class="baseDuke" value="S" id="rdmOdontologiaSim"  type="radio" />
+		    <label for="rdmOdontologiaSim">Sim</label>
+		    <input  required="" name="rdmOdontologia" class="custom"  value="N" id="rdmOdontologiaNao"  type="radio" />
+		    <label for="rdmOdontologiaNao">Não</label>
+		    <div id="divOdonto" >
+				<legend for="txtDetalhesOdonto">Qual(is)?</legend>
+				<input name="txtDetalhesOdonto" id="txtDetalhesOdonto" value="" type="text">
+				<legend for="txtTempoOdonto">Há quanto tempo (em meses)?</legend>
+				<input type="range" name="txtTempoOdonto" id="txtTempoOdonto" value="0" min="0" max="36" data-highlight="true">
+			</div>
+			<legend for="rdmGenitourinario">Realizou procedimento(s) genitourinário(s) recente(s)?</legend>
+		    <input required name="rdmGenitourinario" codigo="5"  class="baseDuke" value="S" id="rdmGenitourinarioSim"  type="radio" />
+		    <label for="rdmGenitourinarioSim">Sim</label>
+		    <input required name="rdmGenitourinario" class="custom"  value="N" id="rdmGenitourinarioNao"  type="radio" />
+		    <label for="rdmGenitourinarioNao">Não</label>
+		    <div id="divGenitourinario" >
+				<legend for="txtDetalhesGenitourinario">Qual?</legend>
+				<input name="txtDetalhesGenitourinario" id="txtDetalhesGenitourinario" value="" type="text">
+				<legend for="txtTempoGenitourinario">Há quanto tempo(em meses)?</legend>
+				<input type="range" name="txtTempoGenitourinario" id="txtTempoGenitourinario" value="0" min="0" max="36" data-highlight="true">
+			</div>
+			<legend for="rdmDigestivo">Realizou procedimento(s) digestivo(s) recente(s)?</legend>
+		    <input required name="rdmDigestivo" class="baseDuke" codigo="6"  value="S" id="rdmDigestivoSim"  type="radio" />
+		    <label for="rdmDigestivoSim">Sim</label>
+		    <input required name="rdmDigestivo" class="custom"  value="N" id="rdmDigestivoNao"  type="radio" />
+		    <label for="rdmDigestivoNao">Não</label>
+		    <div id="divDigestivo">
+				<legend for="txtDetalhesDigestivo">Qual(is)?</legend>
+				<input name="txtDetalhesDigestivo" id="txtDetalhesDigestivo" value="" type="text">
+				<legend for="txtTempoDigestivo">Há quanto tempo (em meses)?</legend>
+				<input type="range" name="txtTempoDigestivo" id="txtTempoDigestivo" value="0" min="0" max="36" data-highlight="true">
+
+			</div>
+			<label>Fatores de risco para EI:</label>
+			<input required name="chkDrogas" codigo="7" class="baseDuke" value="drogas" id="chkDrogas"  type="checkbox"><label for="chkDrogas">Usuário de drogas</label>
+		    <input required name="chkHemodialise" codigo="8"  class="baseDuke" value="hemodialise" id="chkHemodialise"  type="checkbox"><label for="chkHemodialise">Hemodiálise</label>
+		    <input required name="chkDispositivosInvasivos" codigo="9"  class="baseDuke" value="DispositivosInvasivos" id="chkDispositivosInvasivos"  type="checkbox"><label for="chkDispositivosInvasivos">Dispositivos invasivos (marcapasso/CDI, cateter central, sonda vesical)</label>
+		    <input required name="chkCirurgiaCardiaca" codigo="10" class="baseDuke" value="CirurgiaCardiaca" id="chkCirurgiaCardiaca"  type="checkbox"><label for="chkCirurgiaCardiaca">Cirurgia cardíaca anterior</label>
+		    <input required name="chkCardiopatiaCongenita" codigo="11" class="baseDuke" value="CardiopatiaCongenita" id="chkCardiopatiaCongenita"  type="checkbox"><label for="chkCardiopatiaCongenita">Cardiopatia congênita</label>
+		    <input required name="chkFebreReumatica" codigo="12" class="baseDuke" value="FebreReumatica" id="chkFebreReumatica"  type="checkbox"><label for="chkFebreReumatica">Febre reumática</label>
+		    <input required name="chkLesoesCutaneas" codigo="13" class="baseDuke" value="LesoesCutaneas" id="chkLesoesCutaneas"  type="checkbox"><label for="chkLesoesCutaneas">Lesões cutâneas</label>
+		</form>
+	</div><!-- /content -->
+		
+		<div class="ui-grid-solo" id="footer">
+		    <div class="ui-block-a"><a id="aLink" href="#critdukeM"  class="ui-btn ui-shadow ui-corner-all">Critérios de Duke</a></div>
+		</div>
+
+		<!-- rightpanel3  -->
+		<div data-role="panel" id="rightpanel2" data-position="right" data-display="overlay" >
+			<ul data-role="listview">
+				<li data-role="list-divider">Menu</li>
+			    <li data-icon="navigation"><a href="#referencia">Referências</a></li>
+			    <li data-icon="info"><a href="#creditos">Créditos</a></li>
+			    <li data-icon="delete"><a href="#" data-rel="close">Fechar</a></li>
+			</ul>
+
+	      
+		</div><!-- /rightpanel3 -->
+
+</div>	
+
+
+	
+<!-- third page -->
+<div data-role="page" id="critdukeM">
+
+	<div data-role="header" data-position="fixed" id="header">
+		<a href="#avaliacaoclinica" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Critérios de Duke</h1>
+		<a href="#rightpanel3" data-icon="bars" data-iconpos="notext">Menu</a>
+	</div><!-- /header -->
+	<div data-role="popup" id="errorPOPUp">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<p id="msgError"></p>
+	</div>
+
+	<div data-role="tabs" id="tabs">
+	  <div data-role="navbar">
+	    <ul>
+	      <li><a href="#one" class="ui-btn-active ui-state-persist" data-ajax="false">Maiores</a></li>
+	      <li><a href="#two" data-ajax="false">Menores</a></li>
+	    </ul>
+	  </div>
+	  <div id="one" class="ui-body-d ui-content">
+				<div role="main" class="ui-content">
+					<form id="frmCriteriosDukeM" action="post">
+						<input required class="critMa" codigo="14"  name="chkMicroorganismos" value="microorganismos" id="chkMicroorganismos"  type="checkbox"><label for="chkMicroorganismos">Isolamento de microrganismos condizentes com EI em duas hemoculturas distintas na ausência de um foco primário</label>
+						<input required name="chkPersistentePositiva" codigo="15"  value="persistente" id="chkPersistentePositiva"  type="checkbox"><label for="chkPersistentePositiva">Hemoculturas persistentemente positivas</label>
+						<div id="divHemocultura">
+							<input required class="critMa" name="rdmHemoculturas" value="12" id="rdmHemoculturas12"  type="radio"><label for="rdmHemoculturas12">Hemoculturas coletadas > 12h de intervalo</label>
+							<input required class="critMa" name="rdmHemoculturas" value="33" id="rdmHemoculturas33"  type="radio"><label for="rdmHemoculturas33">Hemoculturas coletadas 3/3</label>
+							<input required class="critMa" name="rdmHemoculturas" value="50" id="rdmHemoculturas50"  type="radio"><label for="rdmHemoculturas50">Hemoculturas coletadas > 50% de 4</label>
+							<input required class="critMa" name="rdmHemoculturas" value="1" id="rdmHemoculturasM1"  type="radio"><label for="rdmHemoculturasM1">Mais hemoculturas separadas, sendo a primeira e ultima coletadas com um intervalo de 1h</label>
+						</div>
+						<input required class="critMa" codigo="16"  name="chkEcocardiograma" value="ecocardiograma" id="chkEcocardiograma"  type="checkbox"><label for="chkEcocardiograma">Ecocardiograma com evidências de EI (vegetações, abscessos ou nova deiscência de valva protética)</label>
+						<input required class="critMa" codigo="17"  name="chkSopro" value="sopro" id="chkSopro"  type="checkbox"><label for="chkSopro">Aparecimento de sopro ou mudança de sopro preexistente</label>
+					</form>
+				</div><!-- /content -->	   
+	  </div>
+	  <div id="two">
+	    	<div role="main" class="ui-content">
+				<form id="frmCriteriosDukem" action="post">
+					<input required name="chkFator" codigo="18" value="fator" id="chkFator"  type="checkbox"><label for="chkFator">Fator predisponente para EI (hemodiálise, uso de dispositivo cardíaco, usuário de drogas, cardiopatia congênita)</label>
+					<div data-role="fieldcontain">
+					<label>Fenômenos vasculares:</label>
+						<input required class="critme" codigo="19" name="chkEmbolos" value="embolos" id="chkEmbolos"  type="checkbox"><label for="chkEmbolos">Grandes êmbolos arteriais</label>
+						<label></label>
+						<input required class="critme" codigo="20" name="chkInfartos" value="infartos" id="chkInfartos"  type="checkbox"><label for="chkInfartos">Infartos sépticos pulmonares</label>
+						<label></label>
+						<input required class="critme" codigo="21" name="chkAneurisma" value="aneurisma" id="chkAneurisma"  type="checkbox"><label for="chkAneurisma">Aneurisma micótico</label>
+						<label></label>
+						<input required class="critme" codigo="22" name="chkIntracraniana" value="intracraniana" id="chkIntracraniana"  type="checkbox"><label for="chkIntracraniana">Hemorragia intracraniana</label>
+						<label></label>
+						<input required class="critme" codigo="23" name="chkConjuntivas" value="conjuntivas" id="chkConjuntivas"  type="checkbox"><label for="chkConjuntivas">Hemorragias conjuntivais</label>
+						<label></label>
+						<input required class="critme" codigo="24" name="chkJaneway" value="janeway" id="chkJaneway"  type="checkbox"><label for="chkJaneway">Lesões de Janeway</label>
+						<label></label>
+					</div>
+					<input required class="critme" codigo="25" name="chkFebre" value="infartos" id="chkFebre"  type="checkbox"><label for="chkFebre">Febre > 37,6º</label>
+					<div data-role="fieldcontain">
+						<label>Fenômenos imunológicos:</label>
+						<input required class="critme" codigo="26" name="chkGlomerulonefrite" value="glomerulonefrite" id="chkGlomerulonefrite"  type="checkbox"><label for="chkGlomerulonefrite">Glomerulonefrite</label>
+						<label></label>
+						<input required class="critme" codigo="27" name="chkOsler" value="osler" id="chkOsler"  type="checkbox"><label for="chkOsler">Nódulos de Osler</label>
+						<label></label>
+						<input required class="critme" codigo="28" name="chkRoth" value="roth" id="chkRoth"  type="checkbox"><label for="chkRoth">Manchas de Roth</label>
+						<label></label>
+						<input required class="critme" codigo="29" name="chkReumatoide" value="reumatoide" id="chkReumatoide"  type="checkbox"><label for="chkReumatoide">Fator Reumatoide</label>
+						<label></label>
+					</div>
+					<input required class="critme" codigo="30" name="chkHemoculturas" value="hemoculturas" id="chkHemoculturas"  type="checkbox"><label for="chkHemoculturas">Hemoculturas positivas que não satisfazem critérios maiores</label>
+				</form>
+			</div><!-- /content -->
+
+
+	  </div>
+	</div>
+
+		<div class="ui-grid-solo" id="footer">
+		    <div class="ui-block-a"><a href="#hemocultura"  class="ui-btn ui-shadow ui-corner-all">Hemocultura/Urocultura</a></div>
+		</div>
+
+		<!-- rightpanel3  -->
+		<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" >
+			<ul data-role="listview">
+				<li data-role="list-divider">Menu</li>
+			    <li data-icon="navigation"><a href="#referencia">Referências</a></li>
+			    <li data-icon="info"><a href="#creditos">Créditos</a></li>
+			    <li data-icon="delete"><a href="#" data-rel="close">Fechar</a></li>
+			</ul>
+
+	      
+		</div><!-- /rightpanel3 -->
+
+</div>	
+
+
+
+<!-- four page -->
+<div data-role="page" id="hemocultura">
+
+	<div data-role="header" data-position="fixed" id="header">
+		<a href="#critdukemenores" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Hemocultura/urocultura</h1>
+		<a href="#rightpanel4" data-icon="bars" data-iconpos="notext">Menu</a>
+	</div><!-- /header -->
+	<div data-role="popup" id="errorPOPUp">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<p id="msgError"></p>
+	</div>
+	
+	 <div role="main" class="ui-content">
+		<form id="frmHemoCulturaUrocultura" action="post">
+			<label>Realizada na admissão?</label>
+		    <input required name="chkHemoculturaAdm" class="presentHemo" id="chkHemoculturaAdm"  type="checkbox" /><label for="chkHemoculturaAdm">Hemocultura</label>
+			<input required name="hdmAgenteHemoculturaN" id="hdmAgenteHemoculturaN" value="3"  type="hidden" />
+		    <!--  div id="rangeHemocultura">
+				<legend for="txtTempoFebre">Número de amostras</legend>
+				<input name="txtHemocultura" id="txtHemocultura" value="" placeholder="" type="number">
+			</div-->
+
+			<div id="divHemoculturaDetalhes">
+				<div>
+				   <fieldset data-mini="true" data-type="horizontal" data-role="controlgroup">
+				      <legend>1ª Amostra:</legend>
+				      <input class="hemocultura agentepres" value="true" tardiv="#divAgenteHemocultura1" id="chkAgenteHemocultura1" name="chkAgenteHemocultura1" type="radio" />
+				      <label for="chkAgenteHemocultura1">Agente presente</label>
+				      <input tardiv="#divAgenteHemocultura1" class="agenteNpres" value="false" id="chkAgenteHemocultura1N" name="chkAgenteHemocultura1" type="radio" />
+				      <label for="chkAgenteHemocultura1N">Agente não presente</label>
+				   </fieldset>
+				   <div  data-role="fieldcontain" id="divAgenteHemocultura1">
+				      <label for="txtAgenteHemocultura1">Agente:</label>
+				      <select class="tipoagente" outros="#divtxtAgenteHemocultura1" required="required" name="cmbAgenteHemocultura1" id="cmbAgenteHemocultura1">
+				         <option value="0">Escolha uma opção</option>
+				         <option value="1">Staphylococcus aureus</option>
+				         <option value="2">Streptococcus viridans</option>
+				         <option value="3">Staphylococcus coagulase negativo</option>
+				         <option value="4">Streptococcus sp.</option>
+				         <option value="5">Enterococcus</option>
+				         <option value="6">Estruturas leveduriformes</option>
+				         <option value="7">Outros</option>
+				      </select>
+				      <div style="display:none" data-role="fieldcontain" id="divtxtAgenteHemocultura1">
+				         <label for="txtAgenteHemocultura1">Nome:</label>
+				         <input id="txtAgenteHemocultura1" name="txtAgenteHemocultura1" type="text" />
+				      </div>
+				   </div>
+				</div>
+				<div>
+				   <fieldset data-mini="true" data-type="horizontal" data-role="controlgroup">
+				      <legend>2ª Amostra:</legend>
+				      <input class="hemocultura agentepres" value="true" tardiv="#divAgenteHemocultura2" id="chkAgenteHemocultura2" name="chkAgenteHemocultura2" type="radio" />
+				      <label for="chkAgenteHemocultura2">Agente presente</label>
+				      <input tardiv="#divAgenteHemocultura2" class="agenteNpres" value="false" id="chkAgenteHemocultura2N" name="chkAgenteHemocultura2" type="radio" />
+				      <label for="chkAgenteHemocultura2N">Agente não presente</label>
+				   </fieldset>
+				   <div  data-role="fieldcontain" id="divAgenteHemocultura2">
+				      <label for="txtAgenteHemocultura2">Agente:</label>
+				      <select class="tipoagente" outros="#divtxtAgenteHemocultura2" required="required" name="cmbAgenteHemocultura2" id="cmbAgenteHemocultura2">
+				         <option value="0">Escolha uma opção</option>
+				         <option value="1">Staphylococcus aureus</option>
+				         <option value="2">Streptococcus viridans</option>
+				         <option value="3">Staphylococcus coagulase negativo</option>
+				         <option value="4">Streptococcus sp.</option>
+				         <option value="5">Enterococcus</option>
+				         <option value="6">Estruturas leveduriformes</option>
+				         <option value="7">Outros</option>
+				      </select>
+				      <div style="display:none" data-role="fieldcontain" id="divtxtAgenteHemocultura2">
+				         <label for="txtAgenteHemocultura2">Nome:</label>
+				         <input id="txtAgenteHemocultura2" name="txtAgenteHemocultura2" type="text" />
+				      </div>
+				   </div>
+				</div>
+				<div>
+				   <fieldset data-mini="true" data-type="horizontal" data-role="controlgroup">
+				      <legend>3ª Amostra:</legend>
+				      <input class="hemocultura agentepres" value="true" tardiv="#divAgenteHemocultura3" id="chkAgenteHemocultura3" name="chkAgenteHemocultura3" type="radio" />
+				      <label for="chkAgenteHemocultura3">Agente presente</label>
+				      <input tardiv="#divAgenteHemocultura3" class="agenteNpres" value="false" id="chkAgenteHemocultura3N" name="chkAgenteHemocultura3" type="radio" />
+				      <label for="chkAgenteHemocultura3N">Agente não presente</label>
+				   </fieldset>
+				   <div  data-role="fieldcontain" id="divAgenteHemocultura3">
+				      <label for="txtAgenteHemocultura3">Agente:</label>
+				      <select class="tipoagente" outros="#divtxtAgenteHemocultura3" required="required" name="cmbAgenteHemocultura3" id="cmbAgenteHemocultura3">
+				         <option value="0">Escolha uma opção</option>
+				         <option value="1">Staphylococcus aureus</option>
+				         <option value="2">Streptococcus viridans</option>
+				         <option value="3">Staphylococcus coagulase negativo</option>
+				         <option value="4">Streptococcus sp.</option>
+				         <option value="5">Enterococcus</option>
+				         <option value="6">Estruturas leveduriformes</option>
+				         <option value="7">Outros</option>
+				      </select>
+				      <div style="display:none"  data-role="fieldcontain" id="divtxtAgenteHemocultura3">
+				         <label for="txtAgenteHemocultura3">Nome:</label>
+				         <input id="txtAgenteHemocultura3" name="txtAgenteHemocultura3" type="text" />
+				      </div>
+				   </div>
+				</div>
+			</div>
+			<a href="#" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left" id="btnNewHemocultura">Adicionar amostra</a>
+
+		    
+		    
+		    <input required name="chkUroculturaAdm" class="presentHemo" id="chkUroculturaAdm"  type="checkbox" /><label for="chkUroculturaAdm">Urocultura</label>
+			<input required name="hdmAgenteUroculturaN" id="hdmAgenteUroculturaN" value="3"  type="hidden" />
+			<div id="divUroculturaDetalhes">
+				<div>
+				   <fieldset data-mini="true" data-type="horizontal" data-role="controlgroup">
+				      <legend>1ª Amostra:</legend>
+				      <input class="Urocultura agentepres" value="true" tardiv="#divAgenteUrocultura1" id="chkAgenteUrocultura1" name="chkAgenteUrocultura1" type="radio" />
+				      <label for="chkAgenteUrocultura1">Agente presente</label>
+				      <input tardiv="#divAgenteUrocultura1" class="agenteNpres" value="false" id="chkAgenteUrocultura1N" name="chkAgenteUrocultura1" type="radio" />
+				      <label for="chkAgenteUrocultura1N">Agente não presente</label>
+				   </fieldset>
+				   <div  data-role="fieldcontain" id="divAgenteUrocultura1">
+				      <label for="txtAgenteUrocultura1">Agente:</label>
+				      <select class="tipoagente" outros="#divtxtAgenteUrocultura1" required="required" name="cmbAgenteUrocultura1" id="cmbAgenteUrocultura1">
+				         <option value="0">Escolha uma opção</option>
+				         <option value="1">Staphylococcus aureus</option>
+				         <option value="2">Streptococcus viridans</option>
+				         <option value="3">Staphylococcus coagulase negativo</option>
+				         <option value="4">Streptococcus sp.</option>
+				         <option value="5">Enterococcus</option>
+				         <option value="6">Estruturas leveduriformes</option>
+				         <option value="7">Outros</option>
+				      </select>
+				      <div style="display:none" data-role="fieldcontain" id="divtxtAgenteUrocultura1">
+				         <label for="txtAgenteUrocultura1">Nome:</label>
+				         <input id="txtAgenteUrocultura1" name="txtAgenteUrocultura1" type="text" />
+				      </div>
+				   </div>
+				</div>
+				<div>
+				   <fieldset data-mini="true" data-type="horizontal" data-role="controlgroup">
+				      <legend>2ª Amostra:</legend>
+				      <input class="Urocultura agentepres" value="true" tardiv="#divAgenteUrocultura2" id="chkAgenteUrocultura2" name="chkAgenteUrocultura2" type="radio" />
+				      <label for="chkAgenteUrocultura2">Agente presente</label>
+				      <input tardiv="#divAgenteUrocultura2" class="agenteNpres" value="false" id="chkAgenteUrocultura2N" name="chkAgenteUrocultura2" type="radio" />
+				      <label for="chkAgenteUrocultura2N">Agente não presente</label>
+				   </fieldset>
+				   <div  data-role="fieldcontain" id="divAgenteUrocultura2">
+				      <label for="txtAgenteUrocultura2">Agente:</label>
+				      <select class="tipoagente" outros="#divtxtAgenteUrocultura2" required="required" name="cmbAgenteUrocultura2" id="cmbAgenteUrocultura2">
+				         <option value="0">Escolha uma opção</option>
+				         <option value="1">Staphylococcus aureus</option>
+				         <option value="2">Streptococcus viridans</option>
+				         <option value="3">Staphylococcus coagulase negativo</option>
+				         <option value="4">Streptococcus sp.</option>
+				         <option value="5">Enterococcus</option>
+				         <option value="6">Estruturas leveduriformes</option>
+				         <option value="7">Outros</option>
+				      </select>
+				      <div style="display:none" data-role="fieldcontain" id="divtxtAgenteUrocultura2">
+				         <label for="txtAgenteUrocultura2">Nome:</label>
+				         <input id="txtAgenteUrocultura2" name="txtAgenteUrocultura2" type="text" />
+				      </div>
+				   </div>
+				</div>
+				<div>
+				   <fieldset data-mini="true" data-type="horizontal" data-role="controlgroup">
+				      <legend>3ª Amostra:</legend>
+				      <input class="Urocultura agentepres" value="true" tardiv="#divAgenteUrocultura3" id="chkAgenteUrocultura3" name="chkAgenteUrocultura3" type="radio" />
+				      <label for="chkAgenteUrocultura3">Agente presente</label>
+				      <input tardiv="#divAgenteUrocultura3" class="agenteNpres" value="false" id="chkAgenteUrocultura3N" name="chkAgenteUrocultura3" type="radio" />
+				      <label for="chkAgenteUrocultura3N">Agente não presente</label>
+				   </fieldset>
+				   <div  data-role="fieldcontain" id="divAgenteUrocultura3">
+				      <label for="txtAgenteUrocultura3">Agente:</label>
+				      <select class="tipoagente" outros="#divtxtAgenteUrocultura3" required="required" name="cmbAgenteUrocultura3" id="cmbAgenteUrocultura3">
+				         <option value="0">Escolha uma opção</option>
+				         <option value="1">Staphylococcus aureus</option>
+				         <option value="2">Streptococcus viridans</option>
+				         <option value="3">Staphylococcus coagulase negativo</option>
+				         <option value="4">Streptococcus sp.</option>
+				         <option value="5">Enterococcus</option>
+				         <option value="6">Estruturas leveduriformes</option>
+				         <option value="7">Outros</option>
+				      </select>
+				      <div style="display:none"  data-role="fieldcontain" id="divtxtAgenteUrocultura3">
+				         <label for="txtAgenteUrocultura3">Nome:</label>
+				         <input id="txtAgenteUrocultura3" name="txtAgenteUrocultura3" type="text" />
+				      </div>
+				   </div>
+				</div>
+			</div>
+
+			<a href="#" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left" id="btnNewUrocultura">Adicionar amostra</a>
+		</form>
+	</div><!-- /content -->
+		
+		<div class="ui-grid-solo" id="footer">
+		    <div class="ui-block-a"><a id="fimResult"  href="#result" class="ui-btn ui-shadow ui-corner-all">Ver resultados</a></div>
+		</div>
+
+		<!-- rightpanel3  -->
+		<div data-role="panel" id="rightpanel4" data-position="right" data-display="overlay" >
+			<ul data-role="listview">
+				<li data-role="list-divider">Menu</li>
+			    <li data-icon="navigation"><a href="#referencia">Referências</a></li>
+			    <li data-icon="info"><a href="#creditos">Créditos</a></li>
+			    <li data-icon="delete"><a href="#" data-rel="close">Fechar</a></li>
+			</ul>
+
+	      
+		</div><!-- /rightpanel3 -->
+
+</div>	
+
+<!-- five page -->
+<div data-role="page" id="result">
+
+	<div data-role="header" data-position="fixed" id="header">
+		<a href="#hemocultura" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Resultado</h1>
+		<a href="#rightpanel5" data-icon="bars" data-iconpos="notext">Menu</a>
+	</div><!-- /header -->
+	<div data-role="popup" id="errorPOPUp">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<p id="msgError"></p>
+	</div>
+	
+	<div role="main" class="ui-content">
+		<div class="result" id="divAntibioticoterapia">
+			<h3>Antibiocoterapia específica</h3>
+			<h4>Estreptococos sensíveis à penicilina:</h4>
+			<ol>
+				<li>Penicilina G cristalina 12-18 milhões U/dia IV 4/4h ou Ampicilina 12g/dia IV 6/6h ou 4/4h ou Ceftriaxona 2g/dia IV 24/24h por 4 semanas.</li>
+				<li>Alérgicos a β-lactâmicos: Vancomicina 30mg/kg/dia IV 12/12h por 4 semanas.</li>
+
+			</ol>
+
+			<h4>Estreptococos resistentes à penicilina:</h4>
+			<ol>
+				<li>Penicilina G cristalina 24 milhões U/dia IV 6/6h ou 4/4h OU Ampicilina 12g/dia IV 6/6h ou 4/4h por 4 semanas COM Gentamicina 3mg/kg/dia IV 24/24h por 2 semanas.</li>
+				<li>Alérgicos a β-lactâmicos: Vancomicina 30mg/kg/dia IV 12/12h por 4 semanas + Gentamicina 3mg/kg/dia IV 24/24h por 2 semanas.</li>
+
+			</ol>
+
+			<h4>Estafilococos suscetíveis à oxacilina:</h4>
+			<ol>
+				<li>Oxacilina 12g/dia IV 4/4h ou 6/6h por 4-6 semanas + Gentamicina 3mg/kg/dia IV 12/12h ou 8/8h por 3-5 dias.</li>
+				<li>Alérgicos a β-lactâmicos ou resistência à oxacilina: Vancomicina 30mg/kg/dia IV 12/12h por 4-6 semanas + Gentamicina 3mg/kg/dia IV 12/12h ou 8/8h por 3-5 dias.</li>
+			</ol>
+			<p>
+				OBS: Se EI por Estafilococos em valva protética associar Rifampicina 900-1200 mg/dia VO 12/12h ≥ 6 semanas; aumentar a duração Oxacilina e da Vancomicina para ≥ 6 sem e a de Gentamicina para 2 semanas.
+			</p>
+
+			<h4>Enterococos:</h4>
+			<ol>
+				<li>Ampicilina 200 mg/kg/dia IV 6/6h ou 4/4h + Gentamicina 3 mg/kg/dia IV 8/8h ou 12/12h por 4-6 semanas.</li>
+				<li>Resistência a β-lactâmicos: Vancomicina 30 mg/kg/dia IV 12/12h + Gentamicina 3 mg/kg/dia IV 8/8h ou 12/12h por 6 semanas.</li>
+			</ol>
+			<p>
+				Multirresistência a aminoglicosídeos, β-lactâmicos e Vancomicina: Ceftriaxona 2g/dia IV 24/24h + Ampicilina 12g/dia IV 6/6h por por ≥ 8 semanas OU Linezolida 600 mg/kg/dia 12/12h por ≥ 8 semanas (com monitoração de toxicidade hematológica).
+			</p>
+		</div>
+		<div id="divTerapiaEmpirica" class="result">
+			<h3>Terapia empírica</h3>
+			<h4>
+				Valva nativa ou EI de valva protética tardia (>12 meses de pós-cirurgia): 
+			</h4>
+			<ol>
+				<li>Penicilina G Cristalina 18-24 U/dia IV + Oxacilina 12g/dia IV + Gentamicina 3mg/kg/dia IV 8/8h OU Ampicilina 12g/dia IV 6/6h + Gentamicina 3mg/kg/dia IV 8/8h (+ Oxacilina 12g/dia) por 4-6 semanas.</li>
+				<li>Em casos hospitalares ou alergia: Vancomicina 30mg/kg/dia IV 12/12h + Gentamicina 3mg/kg/dia IV + Ciprofloxacina 800mg/dia IV 12/12h por 4-6 semanas.</li>
+			</ol>
+			
+			<h4>
+				Valva protética precoce (<12 meses de PO) ou marca-passos e desfibriladores: 
+			</h4>
+			<ol>
+				<li>Vancomicina 30mg/kg/dia IV 12/12h por 6 semanas + Gentamicina 3mg/kg/dia IV 12/12h ou 8/8h + Rifampicina 900-1200mg/dia VO 12/12h por 2 semanas.</li>
+			</ol>
+
+		</div>
+		<div class="result" id="divNaoBateSemHemoCultura">
+			<h3>Colha 3 amostras de Hemo/Urocultura antes de iniciar a antibioticoterapia e solicite ecocardiograma. Após os resultados refaça os critérios de DUKE.</h3>
+			<br>
+			
+			<a href="#critdukeM" class="ui-btn ui-btn-inline ui-icon-edit ui-btn-icon-left">Refazer critérios de Duke</a>
+		</div>
+		<div class="result" id="divNaoBateComHemoCultura">
+			<h3>Procure outras causas para a febre/clínica do seu paciente.</h3>
+		</div>
+		<div class="result" id="divNaoASuspeita">
+			<h3>Não há suspeita</h3>
+		</div>
+	</div><!-- /content -->
+		
+		<div class="ui-grid-solo" id="footer">
+		    <div class="ui-block-a"><a id="reinicio" onclick="Restart()" href="#identificacao" class="ui-btn ui-shadow ui-corner-all">Novo diagnóstico</a></div>
+		</div>
+
+		<!-- rightpanel3  -->
+		<div data-role="panel" id="rightpanel5" data-position="right" data-display="overlay" >
+			<ul data-role="listview">
+				<li data-role="list-divider">Menu</li>
+			    <li data-icon="navigation"><a href="#referencia">Referências</a></li>
+			    <li data-icon="info"><a href="#creditos">Créditos</a></li>
+			    <li data-icon="delete"><a href="#" data-rel="close">Fechar</a></li>
+			</ul>
+
+	      
+		</div><!-- /rightpanel3 -->
+
+</div>	
+
+
+<!-- six page -->
+<div data-role="page" id="referencia">
+
+	<div data-role="header" data-position="fixed" id="header">
+		<a href="javascript:history.go(-1)" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Referências</h1>
+		<a href="#rightpanel6" data-icon="bars" data-iconpos="notext">Menu</a>
+	</div><!-- /header -->
+
+	
+	 <div role="main" class="ui-content jqm-content">
+	 	<br>
+		<p>AHA Guidelines, 2007.</p>
+		<p>British Guidelines, 2012.</p>
+		<p>ESC Guidelines, 2009.</p>
+
+		<br><br>
+	
+	</div><!-- /content -->
+		
+		<!-- rightpanel3  -->
+		<div data-role="panel" id="rightpanel6" data-position="right" data-display="overlay" >
+			<ul data-role="listview">
+				<li data-role="list-divider">Menu</li>
+			    <li data-icon="navigation"><a href="#referencia">Referências</a></li>
+			    <li data-icon="info"><a href="#creditos">Créditos</a></li>
+			    <li data-icon="delete"><a href="#" data-rel="close">Fechar</a></li>
+			</ul>
+
+	      
+		</div><!-- /rightpanel3 -->
+
+</div>	
+
+
+<!-- five page -->
+<div data-role="page" id="creditos">
+
+	<div data-role="header" data-position="fixed" id="header">
+		<a href="javascript:history.go(-1)" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Créditos</h1>
+		<a href="#rightpanel7" data-icon="bars" data-iconpos="notext">Menu</a>
+	</div><!-- /header -->
+	<div data-role="popup" id="errorPOPUp">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<p id="msgError"></p>
+	</div>
+	
+	 <div role="main" class="ui-content jqm-content">
+	 	<br><br>
+		<h3>Protocolo de Acompanhamento do Paciente com Endocardite Infecciosa</h3>
+
+		<h4>Elaboração de conteúdo:</h4>
+
+		<p>
+			<span>
+				Profa. Dra. Rosiane Viana Zuza Diniz
+			</span>
+			<br>
+			Coordenadora do projeto
+			Chefe da Unidade de Gerenciamento das Atividades de Pós-graduação do Hospital Universitário Onofre Lopes na Empresa Brasileira de Serviços Hospitalares - HUOL/EBSERH
+			Membro do Laboratório de Inovação Tecnológica em Saúde - LAIS/HUOL
+			Líder do Grupo de Estudos e Pesquisa em Cardiologia - GEPECARDIO
+
+		</p>
+
+		<p>
+			<span>
+				Filipe Marinho Pinheiro da Câmara
+			</span>
+			<br>
+			Acadêmico do Curso de Medicina da UFRN/Campus Natal
+
+		</p>
+
+		<p>
+			<span>
+				Epifânio Silvino do Monte Junior
+			</span>
+			<br>
+			Acadêmico do Curso de Medicina da UFRN/Campus Natal
+
+		</p>
+
+		<p>
+			<span>
+				Francisco Cabral de Oliveira Neto
+			</span>
+			<br>
+			Acadêmico do Curso de Medicina da UFRN/Campus Natal
+
+		</p>
+
+		<p>
+			<span>
+				Dr. Cesimar Severiano do Nascimento
+			</span>
+			<br>
+			Chefe do Serviço de Cardiologia do Hospital Universitário Onofre Lopes - HUOL/EBSERH
+			Coordenador do Programa de Residência Médica em Cardiologia do HUOL/EBSERH
+			Mestrando do Programa de Pós-graduação em Ensino na Saúde - PPGES/MPES
+
+
+		</p>
+
+		<p>
+			<span>
+				Dr. José Roberto Freire Oliveira
+			</span>
+			<br>
+			Médico infectologista da Comissão de Infecção Hospitalar (CCIH) do HUOL/EBSEH
+
+
+		</p>
+
+		<br>
+
+		<h4>Instituições participantes:</h4>
+			<p>Universidade Federal do Rio Grande do Norte - UFRN</p>
+			<p>Hospital Universitário Onofre Lopes - HUOL</p>
+			<p>Empresa Brasileira de Serviços Hospitalares - EBSERH</p>
+			<p>Hospital Giselda Trigueiro - HGT</p>
+
+
+		<h4>Apoio:</h4>
+			<p>Grupo de Estudos e Pesquisa em Cardiologia - GEPECARDIO</p>
+			<p>Laboratório de Inovação Tecnológica em Saúde - LAIS</p>
+			<p>Programa Telessaúde Brasil Redes - Núcleo Rio Grande do Norte</p>
+
+		<br><br>
+		<h3>Ficha técnica</h3>
+
+		<h4>Governo Federal </h4>
+
+		<p>
+			<span>
+				Dilma Vana Rousseff
+			</span>
+			<br>
+			Presidenta da República 
+
+		</p>
+
+		<p>
+			<span>
+				Michel Miguel Elias Temer Lulia  
+			</span>
+			<br>
+			Vice-Presidente da República
+		</p>
+
+		<p>
+			<span>
+				Henrique Paim
+			</span>
+			<br>
+			Ministro da Educação
+		</p>
+
+
+		<h4>Universidade Federal do Rio Grande do Norte (UFRN)</h4>
+		<p>
+			<span>
+				Ângela Maria Paiva Cruz
+			</span>
+			<br>
+			Reitora
+		</p>
+
+		<p>
+			<span>
+				Maria de Fátima Freire Melo Ximenes
+			</span>
+			<br>
+			Vice-Reitora
+		</p>
+
+		<h4>Secretaria de Educação a Distância (SEDIS) </h4>
+		<p>
+			<span>
+				Maria Carmem Freire Diógenes Rêgo 
+			</span>
+			<br>
+			Secretária de Educação a Distância 
+		</p>
+		<p>
+			<span>
+				Ione Rodrigues Diniz Morais
+			</span>
+			<br>
+			Secretária Adjunta de Educação a Distância 
+		</p>
+		<p>
+			<span>
+				Ricardo Alexsandro de Medeiros Valentim 
+			</span>
+			<br>
+			Coordenador de Tecnologia da Informação
+		</p>
+		<p>
+			<span>
+				Kaline Sampaio de Araújo
+			</span>
+			<br>
+			Gestora Técnica da Equipe de Materiais Interativos 
+		</p>
+
+		<h4>
+			Equipe técnica
+		</h4>
+		<p>
+			<span>
+				Kaline Sampaio de Araújo
+			</span>
+			<br>
+			Design Instrucional e Revisão de Língua Portuguesa
+		</p>
+
+		<p>
+			<span>
+				Rommel Figueiredo F. C. de Carvalho
+			</span>
+			<br>
+			Arte da capa
+		</p>
+
+		<p>
+			<span>
+				Esdras Caleb Oliveira Silva
+			</span>
+			<br>
+			Desenvolvimento Back-end
+		</p>
+
+		<p>
+			<span>
+				Desenvolvimento Front-end
+			</span>
+			<br>
+			Elionai Augusto Silva de Melo
+		</p>
+	
+	</div><!-- /content -->
+		
+		
+
+		<!-- rightpanel3  -->
+		<div data-role="panel" id="rightpanel7" data-position="right" data-display="overlay" >
+			<ul data-role="listview">
+				<li data-role="list-divider">Menu</li>
+			    <li data-icon="navigation"><a href="#referencia">Referências</a></li>
+			    <li data-icon="info"><a href="#creditos">Créditos</a></li>
+			    <li data-icon="delete"><a href="#" data-rel="close">Fechar</a></li>
+			</ul>
+
+	      
+		</div><!-- /rightpanel3 -->
+
+</div>	
+
+
+
+</body>
+</html>
